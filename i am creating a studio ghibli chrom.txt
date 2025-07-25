@@ -1,0 +1,27 @@
+ i am creating a studio ghibli chrome side bar extension called stupid worm that:
+- releases a pixel soot icon every 25 minutes, that slowly scutters towards the user's mouse position on screen (later scope: annoy soot by clicking on it, add toast message)
+- opening the side bar shows the to-do list, clock facilities (stopwatch, alarms, timer) and note taking ai facility. these three features are selected in horizontal accordion style
+- the note taking feature accesses the audio playing on the screen, records that and converts it to text. it then uses api to convert them into summarised notes for the user
+
+directory:
+stupid-soot/
+├── assets/
+└── background/
+│       ├── todo.png
+│       ├── notes.png
+│       └── clock.png
+├── clock/
+│       ├── alarm.png
+│       ├── stopwatch.png
+│       └── timer.png
+├── components/
+│   ├── clock.js
+│   └── slide.png
+├── index.html
+├── style.css
+├── manifest.json 
+├── main.js
+├── icon.png (TO BE REPLACED)
+
+
+flask (openai's whisper)+ ffmpeg

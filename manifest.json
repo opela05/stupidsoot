@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "stupid soot",
+  "version": "1.0",
+  "description": "this soot is stupid, but not as stupid as u",
+  "action": {
+    "default_title": "Open Soot",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "storage",
+    "sidePanel",
+    "tabs",
+    "scripting",
+    "activeTab",
+    "notifications",
+    "tabCapture",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "http://localhost:5001/*"
+  ],
+  "background": {
+    "service_worker": "main.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "index.html",
+    "open_at_install": true
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon.png",
+        "assets/background/*.png",
+        "contentToast.js",
+        "assets/sounds/alarm.mp3"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

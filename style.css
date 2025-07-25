@@ -1,0 +1,602 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* border for debugging! */
+/* * {
+  border: 1px solid red;
+} */
+
+#soot-sidebar {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+#tab-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.4s ease, flex 0.4s ease;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.preview {
+  flex: 1;
+}
+
+.expanded {
+  flex: 1 1 100%;
+  z-index: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.hidden-tab {
+  transform: translateX(100%);
+}
+
+#soot-close {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-size: 20px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* clock */
+#clock.expanded {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.clock-buttons {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  padding-left: 115px;
+  gap: 30px;
+  overflow: visible;
+  transition: all 0.4s ease;
+}
+
+.clock-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  gap: 10px;
+  position: relative;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  z-index: 1;
+}
+
+.clock-btn img {
+  width: 100px;
+  height: 100px;
+  transition: all 0.4s ease;
+}
+
+.clock-btn img:hover {
+  width: 110px;
+  height: 110px;
+}
+
+.clock-btn.to-fixed {
+  position: fixed;
+  top: 50px;
+  left: 40px;
+  transform: scale(1.1);
+  z-index: 1000;
+  transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.clock-btn.dimmed {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.clock-btn.dimmed {
+  display: none;
+  opacity: 0.0;
+  transform: scale(0.3);
+  pointer-events: none;
+}
+
+/* stopwatch */
+.stopwatch-pane {
+  margin-top: 20px;
+  display: block;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 12px;
+  color: #333;
+  transform: translate(50px, -350px);
+}
+
+.stopwatch-display {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: rgb(20, 43, 15);
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.stopwatch-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.stopwatch-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 40px;
+  color: rgb(238, 236, 221);
+  transition: transform 0.3s ease;
+}
+
+.stopwatch-btn:hover {
+  transform: scale(1.2);
+  color: rgb(104, 118, 88);
+}
+
+
+/* alarm */
+.alarm-pane {
+  position: absolute;
+  left: 30px;
+  top: 250px;
+  max-height: 50vh;
+  overflow-y: hidden;
+  width: 300px;
+  color: #3b3b3b; /* Added from previous version, assuming it was missing */
+}
+
+.alarm-pane .form-control {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  color: #3b3b3b;
+}
+
+.alarm-pane .list-group-item {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #3b3b3b;
+}
+
+.alarm-pane .btn-secondary.active {
+  background-color: rgb(104,118,88) !important;
+  border-color: rgb(104,118,88) !important;
+}
+
+.alarm-pane .bi-trash2-fill {
+  color: #dc3545;
+}
+
+.alarm-pane .bi-trash2-fill:hover {
+  color: #c82333;
+}
+
+.alarm-pane .triggered-alarm {
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* timer */
+.timer-pane {
+  position: absolute;
+  left: 30px;
+  top: 250px;
+  max-height: 50vh;
+  width: 300px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+  color: #141f19; 
+}
+
+.timer-top-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 0 10px;
+}
+
+.timer-icons i {
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 10px;
+}
+
+.timer-display-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgb(111,136,76, 0.4);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.timer-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  background: conic-gradient(#6f884c 100%, transparent 100%);
+  transition: background 0.3s linear;
+}
+
+.timer-inner-circle {
+  position: relative;
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 1;
+}
+
+.timer-countdown {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.timer-end-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.timer-input-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.timer-input-controls input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #3b3b3b;
+}
+
+.timer-input-controls span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #3b3b3b;
+}
+
+.timer-set-btn {
+  background-color: rgb(104,118,88);
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.timer-set-btn:hover {
+  opacity: 0.9;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.timer-controls .btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: rgb(62, 78, 39);
+  transition: transform 0.2s ease-in-out;
+}
+
+.timer-controls .btn:hover {
+  transform: scale(1.1);
+}
+
+/* to do */
+.todo-container {
+  padding: 120px 20px 10px;
+  font-family: 'Yomogi', cursive;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.todo-input-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.todo-input {
+  flex-grow: 1;
+  padding: 0;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  box-shadow: none;
+  resize: none;
+  min-height: 1.2em;
+  line-height: 1.2em;
+  height: auto;
+  white-space: pre-wrap;
+  overflow: hidden;
+  font-family: 'Yomogi', cursive;
+  font-weight: 100;
+  font-size: larger;
+}
+
+.add-icon {
+  display: none;
+}
+
+.todo-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+  padding: 0px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  min-height: 1.2em;
+  line-height: 1.2em;
+  margin-bottom: 5px;
+  font-family: 'Yomogi', cursive;
+  font-size: large;
+}
+
+.task-checkbox {
+  font-size: 1.2rem;
+  margin-right: 8px;
+  cursor: pointer;
+  color: #3b3b3b;
+}
+
+.task-text {
+  flex-grow: 1;
+  word-wrap: break-word;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.remove-icon,
+.complete-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.todo-item.done .task-text {
+  text-decoration: line-through;
+  color: #777;
+  opacity: 0.6;
+}
+
+/* body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+} */
+
+.notes-pane {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cd-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.cd {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.spin {
+  animation: spinCD 2s linear infinite;
+}
+
+@keyframes spinCD {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rec-button {
+  position: absolute;
+  width: 120px;
+  padding: 0.6rem 1rem;
+  background-color: rgba(80, 113, 255, 0.4);
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  z-index: 1;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.rec-button:hover {
+  transform: scale(1.08);
+}
+
+#startRecBtn {
+  top: 25%;
+  right: -80px;
+}
+
+#stopRecBtn {
+  top: 55%;
+  right: -80px;
+}
+
+.transcript-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding-bottom: 2rem;
+  overflow-y: visible;
+}
+
+.transcript-card {
+  background-color: rgba(50, 107, 112, 0.4);
+  color: #000;
+  border-radius: 1rem;
+  padding: 0.8rem 1.2rem;
+  font-family: 'Yomogi', cursive;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.transcript-card .transcript-body {
+  background-color: rgba(138, 179, 183, 0.7);
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.8rem;
+  margin-top: 0.8rem;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 1;
+  font-family: 'Yomogi', cursive;
+}
+
+.transcript-card.collapsed .transcript-body {
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.transcript-card.open .transcript-body {
+  max-height: 9999px;
+  overflow: visible;
+  opacity: 1;
+  white-space: pre-wrap;
+}
+
+.transcript-header {
+  font-weight: bold;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  cursor: text;
+  padding-bottom: 0.4rem;
+  font-family: "Yusei Magic", sans-serif;
+}
+
+.summary-text,
+.summary-notes {
+  margin-bottom: 0.5rem;
+  font-family: 'Yomogi', cursive;
+}
