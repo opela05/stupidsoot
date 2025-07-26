@@ -85,6 +85,7 @@ python -m venv venv
 source venv/bin/activate   # Use `venv\Scripts\activate` on Windows
 pip install -r requirements.txt
 python app.py
+```
 Flask will start at `http://localhost:5000`.
 
 ### 2. Chrome Extension Installation
