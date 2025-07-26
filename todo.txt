@@ -1,9 +1,0 @@
-
-- tab gets muted. what's the fix
-- what are keyframes?
-- learn how the todo list works (like how the input is added into a dynamic list)
-- webkit ellipsis??
-- conic-gradient?
-scope:
-add lap button for stopwatch?
-add users to add alarm with an actual clock dial
