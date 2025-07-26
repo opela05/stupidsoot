@@ -145,7 +145,7 @@ Here are some visual examples of the extension's features and the soot sprite an
 ### Sidebar Tools
 | Alarm | Clock | Stopwatch | Timer | To-Do List | Notes |
 |---|---|---|---|---|---|
-| ![Alarm Interface](assets/demo/alarm.png) | ![Clock Interface](assets/demo/clock.png) | ![Stopwatch Interface](assets/demo/stopwatch.png) | ![Timer Interface](assets/demo/timer.png) | ![To-Do List Interface](`assets/demo/todo.png`) | ![Notes Interface](assets/demo/notes.png) |
+| ![Alarm Interface](assets/demo/alarm.png) | ![Clock Interface](assets/demo/clock.png) | ![Stopwatch Interface](assets/demo/stopwatch.png) | ![Timer Interface](assets/demo/timer.png) | ![To-Do List Interface](assets/demo/todo.png) | ![Notes Interface](assets/demo/notes.png) |
 ---
 
 ## Scope
