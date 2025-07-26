@@ -1,6 +1,6 @@
 # Stupid Worm — Chrome Sidebar Extension
 
-A productivity companion inspired by Studio Ghibli’s soot sprites. This Chrome extension integrates a whimsical element into your browsing experience while providing essential tools to keep you organized and efficient.
+A productivity companion inspired by Studio Ghibli’s soot sprites. This Chrome extension integrates a whimsical element into your Browse experience while providing essential tools to keep you organized and efficient.
 
 Every 25 minutes, a curious pixel soot appears on your screen and scampers toward your mouse. Inside the sidebar, you’ll find a To-Do list, a versatile clock, and an AI-powered note-taker that transcribes and summarizes audio from your current tab.
 
@@ -10,7 +10,7 @@ Every 25 minutes, a curious pixel soot appears on your screen and scampers towar
 
 ### Soot Sprite Companion
 
-- An animated pixel soot sprite that walks, idles, and follows your mouse cursor.
+- An animated pixel soot sprite that walks, idles, and follows your mouse cursor. These sprites were hand-animated by me on [Piskelapp.com](https://www.piskelapp.com/).
 - Appears every 25 minutes to provide a periodic, mindful, and entertaining presence.
 - Optional interactivity allows you to drag/drop the soot sprite or let it roam freely.
 
@@ -71,6 +71,7 @@ The extension features a dynamic sidebar accessible via the extension icon. This
   - `/start`: Optional lazy model init on port 5001
 - **Tools**: FFmpeg, Whisper or faster-whisper
 - **Dependencies**: Flask, Whisper, soundfile, etc. (in `requirements.txt`)
+- **Launcher**: The `app.py` backend can be launched via Node.js using `launcher.js`.
 
 ---
 
@@ -81,7 +82,7 @@ The extension features a dynamic sidebar accessible via the extension icon. This
 ```bash
 cd backend/
 python -m venv venv
-source venv/bin/activate  # Use `venv\Scripts\activate` on Windows
+source venv/bin/activate   # Use `venv\Scripts\activate` on Windows
 pip install -r requirements.txt
 python app.py
 Flask will start at `http://localhost:5000`.
@@ -103,7 +104,7 @@ Flask will start at `http://localhost:5000`.
 
 - Appears every 25 minutes
 - Follows your mouse
-- May support click interactions in future versions
+- Support click interactions 
 
 ### Sidebar Navigation
 
@@ -114,10 +115,10 @@ Flask will start at `http://localhost:5000`.
 ### To-Do
 
 - Add tasks via input + Enter
-- Check to mark as complete
-- Remove tasks easily
+- Check to mark as complete + Strikethrough
+- Remove tasks 
 
-### Clock
+### Clock(Three Animated Buttons)
 
 - **Stopwatch**: Start, pause, reset
 - **Alarm**: Set specific time, notifies with a “ding” sound
@@ -131,14 +132,28 @@ Flask will start at `http://localhost:5000`.
 4. Transcripts and summaries show up as collapsible cards
 
 ---
+## Demos
 
-## Planned Features / Future Scope
+Here are some visual examples of the extension's features and the soot sprite animations:
+
+### Soot Sprite Animations
+| Walking | Angry |
+|---|---|
+| ![Soot Walk Animation](assets/soot/sootwalk.png) | ![Soot Angry Animation](assets/soot/sootangry.png) |
+
+### Sidebar Tools
+| Alarm | Clock | Stopwatch | Timer | To-Do List | Notes |
+|---|---|---|---|---|---|
+| ![Alarm Interface](assets/demo/alarm.png) | ![Clock Interface](assets/demo/clock.png) | ![Stopwatch Interface](assets/demo/stopwatch.png) | ![Timer Interface](assets/demo/timer.png) | ![To-Do List Interface](assets/demo/to do.png) | ![Notes Interface](assets/demo/notes.png) |
+---
+
+## Scope
 
 - Soot sprite animations on click (fun reactions)
-- Persistent stopwatch and timer states
 - Export/categorize notes
-- Theme customization
-- Sprite customization
+- Add a lap button for the stopwatch
+- Allow users to add alarms with an actual clock dial interface
+- Further refine sprite interaction and idle animations
 
 ---
 
